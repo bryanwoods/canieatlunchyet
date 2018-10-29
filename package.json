@@ -2,9 +2,8 @@
   "name": "canieatlunchyet",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://bryanwoods.github.io/canieatlunchyet",
+  "homepage": "https://www.canieatlunchyet.net",
   "predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
   "dependencies": {
     "global": "^4.3.2",
     "react": "^16.5.2",
