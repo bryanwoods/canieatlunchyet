@@ -20,9 +20,19 @@ class App extends Component<{}, IState> {
     }
   }
 
-  public getTime = () => new Date();
+  public componentDidMount(): void {
+    setInterval(() => this.tick(), 1000);
+  }
 
-  public tick(): void {
+  public render(): JSX.Element {
+    return (
+      <h1>{this.isLunchTime()}</h1>
+    );
+  }
+
+  private getTime = () => new Date();
+
+  private tick(): void {
     this.setState((state) => {
       const time = this.getTime();
 
@@ -34,34 +44,27 @@ class App extends Component<{}, IState> {
     });
   }
 
-  public componentDidMount(): void {
-    setInterval(() => this.tick(), 1000);
-  }
+  private greetingMessage = (): string => {
+    const NOON = 12;
+    const ONE_PM = 13;
 
-  public greetingMessage = (): string => {
     const { hour, minute, second } = this.state;
 
     const afternoon = (hour === 12 && (minute >= 1 || second >= 1))
 
-    if (hour <= 12 && !afternoon) {
+    if (hour <= NOON && !afternoon) {
       return 'NO';
     }
-    else if (hour >= 12 && hour < 13) {
-      return 'YES'
+    else if (hour >= NOON && hour < ONE_PM) {
+      return 'YES';
     }
     else {
-      return 'YOU ALREADY ATE'
+      return 'YOU ALREADY ATE';
     }
   };
 
-  public isLunchTime(): string {
+  private isLunchTime(): string {
     return this.greetingMessage();
-  }
-
-  public render(): JSX.Element {
-    return (
-      <h1>{this.isLunchTime()}</h1>
-    );
   }
 }
 
